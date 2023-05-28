@@ -13,7 +13,7 @@
 float voltage_power_supply;
 float Ualpha, Ubeta = 0, Ua = 0, Ub = 0, Uc = 0;
 float zero_electric_angle = 0;
-int PP = 1, DIR = 1;
+int PP = 7, DIR = 1;
 
 void DFOC_Vbus(float power_supply)
 {

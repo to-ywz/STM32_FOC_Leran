@@ -54,12 +54,13 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+extern uint8_t flag;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 float angle = 0;
+float inc_angle = 0;
 /* USER CODE END 0 */
 
 /**
@@ -104,19 +105,24 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
   encoder_init();
 
-  DFOC_Vbus(12.4);
-
+  DFOC_Vbus(12.4); 
+  DFOC_alignSensor(Motor_PP, Sensor_DIR);
   printf("System is initialized.\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  float p_angle = 0;
-   
+
   while (1)
   {
-    angle = encoder_get_polar_angle();
-    setTorque(kp * (0 - Sensor_DIR * angle) * 180 / PI, _electricalAngle());
+    if (flag)
+    {
+      flag = 0;
+      angle = encoder_get_polar_angle();
+      inc_angle = 0 - Sensor_DIR * angle;
+      // printf("angle:%.2f", encoder_get_angle());
+      setTorque(kp * inc_angle * 180 / PI, _electricalAngle());
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
