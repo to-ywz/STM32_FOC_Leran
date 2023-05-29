@@ -82,7 +82,7 @@ void DFOC_alignSensor(int _PP, int _DIR)
 	HAL_Delay(3000);
 	zero_electric_angle = _electricalAngle();
 	setTorque(0, _3PI_2);
-	printf("0电角度：%.2f", zero_electric_angle);
+	printf("0电角度：%.2f\r\n", zero_electric_angle);
 }
 
 float DFOC_M0_Angle()

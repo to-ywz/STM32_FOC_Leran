@@ -120,7 +120,8 @@ int main(void)
       flag = 0;
       angle = encoder_get_polar_angle();
       inc_angle = 0 - Sensor_DIR * angle;
-      // printf("angle:%.2f", encoder_get_angle());
+      printf("angle:%.2f\r\n", encoder_get_angle());
+			//HAL_Delay(10); 
       setTorque(kp * inc_angle * 180 / PI, _electricalAngle());
     }
     /* USER CODE END WHILE */

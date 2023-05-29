@@ -1,4 +1,4 @@
-#ifndef FOC_H_
+ #ifndef FOC_H_
 #define FOC_H_
 
 typedef struct

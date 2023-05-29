@@ -1,37 +1,37 @@
 #include "stdint.h"
 #include "foc.h"
 
-#include <svpwm.h>
+// #include <svpwm.h>
 
-void clark_init(clark_t *this)
-{
-}
+#define PI 3.14159265358f
+#define _3PI_2 4.71238898038f
+#define PWM_PERIOD 5600
 
-void park_init(park_t *this)
-{
-}
+// 钳位
+#define _constrain(amt, low, high) ((amt) < (low) ? (low) : ((amt) > (high) ? (high) : (amt)))
 
-void svpwm_init(svpwm_t *this)
-{
-}
+static float power_supply_volt = 0;
 
-static void clark_transformation(clark_t *this)
+typedef struct
 {
-    float sqrt_3 = 3;
-    arm_sqrt_f32(3, &sqrt_3); // 硬件浮点指令(//* 需要去设置一下F4的浮点加速)
+    // 输入
+    float u_q;
 
-    this->i_alpha = this->i_a;
-    this->i_beta = (sqrt_3 / 3) * (this->i_a + (this->i_b * 2));
-}
-static void clark_inverse_transformation()
-{
-}
+    // 输出
+    float u_alpha;
+    float u_beta;
 
-static void park_transformation()
+} park_t;
+
+typedef struct
 {
-}
-static void park_inverse_transformation()
-{
-}
+    // 输入
+    float u_alpha;
+    float u_beta;
+
+    float u_a;
+    float u_b;
+    float u_c;
+} clark_t;
 
 // END OF FILE
