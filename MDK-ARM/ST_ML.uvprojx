@@ -549,6 +549,16 @@
               <FileType>1</FileType>
               <FilePath>..\Core\FOC\foc_my.c</FilePath>
             </File>
+            <File>
+              <FileName>foc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\FOC\foc.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\FOC\pid.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -29,6 +29,9 @@
 #include "encoder.h"
 #include "math.h"
 #include "foc_my.h"
+// #include "foc.h"
+#include "pid.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -81,10 +84,10 @@ int main(void)
   /* USER CODE BEGIN Init */
 
   uint8_t cnt = 0;
-  float kp = 0.1333;
-  int Sensor_DIR = -1; // 传感器方向
+  float kp = 0.13333;
+  int Sensor_DIR = 1; // /传感器方向
   int Motor_PP = 7;    // 电机极对数
-
+  pid_controller_t pid_torque = {0};
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -104,14 +107,19 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
   encoder_init();
+  //pid_init(&pid_torque, 0.1333, 0, 0, 0);
 
-  DFOC_Vbus(12.4); 
+  DFOC_Vbus(12.4);
   DFOC_alignSensor(Motor_PP, Sensor_DIR);
+
+  // foc_init(12.4, 7, -1);
+  // foc_align_sensor();
+
   printf("System is initialized.\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+  /* USER CODE BEGIN WHILE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
 
   while (1)
   {
@@ -121,8 +129,10 @@ int main(void)
       angle = encoder_get_polar_angle();
       inc_angle = 0 - Sensor_DIR * angle;
       printf("angle:%.2f\r\n", encoder_get_angle());
-			//HAL_Delay(10); 
-      setTorque(kp * inc_angle * 180 / PI, _electricalAngle());
+      // HAL_Delay(10);
+
+      // foc_set_torque(kp * inc_angle * 180 / PI, get_electrical_angle());
+      setTorque(kp*inc_angle * 180 / PI, _electricalAngle());
     }
     /* USER CODE END WHILE */
 

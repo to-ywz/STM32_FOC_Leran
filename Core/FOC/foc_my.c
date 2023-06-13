@@ -4,7 +4,6 @@
 #include "foc_my.h"
 #include "stm32f4xx_hal.h"
 
-
 #define PI 3.14159265358f
 #define _3PI_2 4.71238898038f
 #define PWM_PERIOD 5600
@@ -65,7 +64,7 @@ float setTorque(float Uq, float angle_el)
 	Ub = (sqrt(3) * Ubeta - Ualpha) / 2 + voltage_power_supply / 2;
 	Uc = (-Ualpha - sqrt(3) * Ubeta) / 2 + voltage_power_supply / 2;
 	setPwm(Ua, Ub, Uc);
-	
+
 	return 0;
 }
 

@@ -28,6 +28,8 @@
 "st_ml\system_stm32f4xx.o"
 "st_ml\encoder.o"
 "st_ml\foc_my.o"
+"st_ml\foc.o"
+"st_ml\pid.o"
 --library_type=microlib --strict --scatter "ST_ML\ST_ML.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
